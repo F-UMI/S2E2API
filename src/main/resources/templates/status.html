@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head th:replace="~{fragment/header::headerFragment(~{::title})}">
+  <title th:text="회원가입"></title>
+</head>
+<body>
+<th:block layout:fragment="content">
+  <h1>리스트</h1>
+  <table>
+    <thead class="thead-light">
+    <tr class="text-center">
+      <th scope="col">글번호</th>
+      <th scope="col">글제목</th>
+      <th scope="col">작성시간</th>
+      <th scope="col">작성시간</th>
+    </tr>
+    </thead>
+    <tbody >
+    <tr th:each="p : ${posts}">
+      <td scope="row" width="10%">
+        <div th:text="${p.id}"></div>
+      </td>
+      <td scope="row" width="20%">
+        <div th:text="${p.blood_Donation_Count}"></div>
+      </td>
+      <td scope="row" width="20%">
+        <div th:text="${p.blood_Donation_Available_Date}"></div>
+      </td>
+      <td scope="row" width="10%">
+        <div th:text="${p.blood_Donation_Date}"></div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</th:block>
+</th:block>
+
+<th:block layout:fragment="script">
+</th:block>
+</body>
+</html>
