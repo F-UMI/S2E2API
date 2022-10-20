@@ -39,12 +39,12 @@ public class BloodDonationController {
   }
 
 
-  @RequestMapping("/")
-  public String index(Model model) {
-    List<BloodDonationDTO> posts = bloodDonateService.getAll();
-    model.addAttribute("posts", posts);
-    return "status";
-  }
+//  @RequestMapping("/")
+//  public String index(Model model) {
+//    List<BloodDonationDTO> posts = bloodDonateService.getAll();
+//    model.addAttribute("posts", posts);
+//    return "status";
+//  }
 
 
 //  @GetMapping(value = "/donation-status/{count}")
