@@ -3,6 +3,10 @@ spring:
     url: jdbc:mysql://localhost:3306/blood_donation
     username: root
     password: shyu0220
+  mvc:
+    hidden-method:
+      filter:
+        enabled: 'true'
 
   jpa:
     hibernate:
@@ -13,9 +17,6 @@ spring:
   thymeleaf:
     cache: true
     prefix: classpath:/templates/
-
-
-
 
 server:
   port: 8086

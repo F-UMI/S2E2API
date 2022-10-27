@@ -1,7 +1,6 @@
 package com.project.bloodDonation.dto;
 
 
-import com.project.bloodDonation.domain.User;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

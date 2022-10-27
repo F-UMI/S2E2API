@@ -18,7 +18,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @DynamicUpdate
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class BloodDonation {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
