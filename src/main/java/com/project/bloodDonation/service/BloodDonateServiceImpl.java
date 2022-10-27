@@ -22,13 +22,14 @@ import org.springframework.stereotype.Service;
 public class BloodDonateServiceImpl {
 
   private final static int AFTER_BLOOD_DONATION_DATE = 56;
+  private final static long USER_ID = 1L;
   private final static int OVER = 0;
 
   final BloodDonationRepository bloodDonationRepository;
   LocalDate localDate = LocalDate.now();
 
   public ResponseEntity createDonationInfo(BloodDonationDTO donationDTO) {
-    Optional<BloodDonation> donation = bloodDonationRepository.findById(1L);
+    Optional<BloodDonation> donation = bloodDonationRepository.findById(USER_ID);
     if (donation.isEmpty()) {
       BloodDonation donationInfo = BloodDonation.builder()
           .id(donationDTO.getId())
@@ -45,33 +46,24 @@ public class BloodDonateServiceImpl {
   }
 
   //초기 데이터 생성후 상태 페이지 나올때매다 날짜 값이랑 헌혈 횟수를 보여준다.
-  public BloodDonation getDonationInfo(BloodDonationDTO donationDTO) {
-    Optional<BloodDonation> donation = bloodDonationRepository.findById(donationDTO.getId());
-    if (donation.isPresent()) {
-      BloodDonation donationInfo = BloodDonation.builder()
-          .id(donationDTO.getId())
-          .count(donationDTO.getBlood_Donation_Count())
-          .date(donationDTO.getBlood_Donation_Date())
-          .availableDate(count_D_Day(donationDTO.getBlood_Donation_Available_Date()))
-          .build();
-
-      return donationInfo;
-    }
-    return null;
+  public BloodDonation getDonationInfo(Long id) {
+    Optional<BloodDonation> donation = bloodDonationRepository.findById(id);
+    return BloodDonation.builder()
+        .id(donation.get().getId())
+        .count(donation.get().getCount())
+        .date(donation.get().getDate())
+        .availableDate(count_D_Day(donation.get().getAvailableDate()))
+        .build();
   }
 
-  public ResponseEntity deleteDonationInfo(Long id) {
-    BloodDonation donation = bloodDonationRepository.findById(id).get();
-    if (count_D_Day(donation.getAvailableDate()) == OVER) {
-      bloodDonationRepository.deleteById(id);
-      return new ResponseEntity("success", HttpStatus.OK);
+  public ResponseEntity updateDonationInfo(BloodDonationDTO bloodDonationDTO) {
+    Optional<BloodDonation> donation = bloodDonationRepository.findById(bloodDonationDTO.getId());
+    if (bloodDonationDTO.getBlood_Donation_Count() == 0) {
+      donation.get().update(LocalDateTime.now(), localDate.get(ChronoField.DAY_OF_YEAR) + AFTER_BLOOD_DONATION_DATE);
     }
-    return new ResponseEntity("fail", HttpStatus.OK);
+    return new ResponseEntity("success", HttpStatus.OK);
   }
-
-
-  private int count_D_Day(int blood_Donation_Available_Date) {
+  public int count_D_Day(int blood_Donation_Available_Date) {
     return blood_Donation_Available_Date - localDate.get(ChronoField.DAY_OF_YEAR);
   }
-
 }

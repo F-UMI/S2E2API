@@ -1,5 +1,6 @@
 package com.project.bloodDonation.domain;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,4 +33,9 @@ public class BloodDonation {
 
   @Column(name = "blood_Donation_Available_Date", nullable=false)
   private int availableDate;
+
+  public void update(LocalDateTime date, int availableDate) {
+    this.date = date;
+    this.availableDate = availableDate;
+  }
 }

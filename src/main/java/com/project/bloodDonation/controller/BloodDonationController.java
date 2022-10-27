@@ -4,7 +4,10 @@ import com.project.bloodDonation.domain.BloodDonation;
 import com.project.bloodDonation.dto.BloodDonationDTO;
 import com.project.bloodDonation.service.BloodDonateServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,22 +20,22 @@ public class BloodDonationController {
 
   private final BloodDonateServiceImpl bloodDonateService;
 
-  @RequestMapping(value = "/status", method = {RequestMethod.POST})
+  @RequestMapping(value = "/")
   public ResponseEntity createInfo(@RequestBody BloodDonationDTO donationDTO){
     ResponseEntity responseEntity = bloodDonateService.createDonationInfo(donationDTO);
     return responseEntity;
   }
 
-  //이거는 수정해야겠는데?
-  @RequestMapping(value = "/status/load", method = {RequestMethod.POST})
-  public BloodDonation getInfo(BloodDonationDTO donationDTO) {
-    return bloodDonateService.getDonationInfo(donationDTO);
+  @RequestMapping(value = "/{id}")
+  public ResponseEntity getInfo(@PathVariable("id") Long id) {
+    BloodDonation donation = bloodDonateService.getDonationInfo(id);
+    return new ResponseEntity(donation, HttpStatus.OK);
   }
 
-  @RequestMapping(value="/delete/{id}", method = RequestMethod.DELETE)
-  public ResponseEntity deleteInfo(@PathVariable Long id) {
-    ResponseEntity responseEntity = bloodDonateService.deleteDonationInfo(id);
-    return responseEntity;
+  @PatchMapping("/{id}")
+  public ResponseEntity resetInfo(@PathVariable("id") Long id, @RequestBody BloodDonationDTO bloodDonationDTO) {
+      ResponseEntity donationInfo = bloodDonateService.updateDonationInfo(bloodDonationDTO);
+    return new ResponseEntity(donationInfo, HttpStatus.OK);
   }
-  //  }
+
 }
