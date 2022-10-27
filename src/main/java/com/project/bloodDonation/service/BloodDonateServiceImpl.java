@@ -28,8 +28,8 @@ public class BloodDonateServiceImpl {
   LocalDate localDate = LocalDate.now();
 
   public ResponseEntity createDonationInfo(BloodDonationDTO donationDTO) {
-    Optional<BloodDonation> user = bloodDonationRepository.findById(1L);
-    if (user.isEmpty()) {
+    Optional<BloodDonation> donation = bloodDonationRepository.findById(1L);
+    if (donation.isEmpty()) {
       BloodDonation donationInfo = BloodDonation.builder()
           .id(donationDTO.getId())
           .count(donationDTO.getBlood_Donation_Count() + 1)
@@ -46,8 +46,8 @@ public class BloodDonateServiceImpl {
 
   //초기 데이터 생성후 상태 페이지 나올때매다 날짜 값이랑 헌혈 횟수를 보여준다.
   public BloodDonation getDonationInfo(BloodDonationDTO donationDTO) {
-    Optional<BloodDonation> user = bloodDonationRepository.findById(donationDTO.getId());
-    if (user.isPresent()) {
+    Optional<BloodDonation> donation = bloodDonationRepository.findById(donationDTO.getId());
+    if (donation.isPresent()) {
       BloodDonation donationInfo = BloodDonation.builder()
           .id(donationDTO.getId())
           .count(donationDTO.getBlood_Donation_Count())
