@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -35,7 +36,7 @@ public class BloodDonateServiceImpl {
           .id(donationDTO.getId())
           .count(donationDTO.getBlood_Donation_Count() + 1)
           .date(LocalDateTime.now())
-          .availableDate(localDate.get(ChronoField.DAY_OF_YEAR) + AFTER_BLOOD_DONATION_DATE)
+          .availableDate(calculationAvailableDate())
           .build();
 
       bloodDonationRepository.save(donationInfo);
@@ -45,7 +46,6 @@ public class BloodDonateServiceImpl {
     return new ResponseEntity("fail", HttpStatus.OK);
   }
 
-  //초기 데이터 생성후 상태 페이지 나올때매다 날짜 값이랑 헌혈 횟수를 보여준다.
   public BloodDonation getDonationInfo(Long id) {
     Optional<BloodDonation> donation = bloodDonationRepository.findById(id);
     return BloodDonation.builder()
@@ -56,12 +56,18 @@ public class BloodDonateServiceImpl {
         .build();
   }
 
-  public ResponseEntity updateDonationInfo(BloodDonationDTO bloodDonationDTO) {
-    Optional<BloodDonation> donation = bloodDonationRepository.findById(bloodDonationDTO.getId());
-    if (bloodDonationDTO.getBlood_Donation_Count() == 0) {
-      donation.get().update(LocalDateTime.now(), localDate.get(ChronoField.DAY_OF_YEAR) + AFTER_BLOOD_DONATION_DATE);
+  public ResponseEntity updateDonationInfo(Long id, BloodDonationDTO bloodDonationDTO) {
+    BloodDonation donation = bloodDonationRepository.findById(id).get();
+    if (bloodDonationDTO.getBlood_Donation_Count() <= 0) {
+      donation.update(LocalDateTime.now(), calculationAvailableDate());
+      bloodDonationRepository.save(donation);
+      return new ResponseEntity("success", HttpStatus.OK);
     }
-    return new ResponseEntity("success", HttpStatus.OK);
+    return new ResponseEntity("fail", HttpStatus.OK);
+  }
+
+  private int calculationAvailableDate() {
+    return localDate.get(ChronoField.DAY_OF_YEAR) + AFTER_BLOOD_DONATION_DATE;
   }
   public int count_D_Day(int blood_Donation_Available_Date) {
     return blood_Donation_Available_Date - localDate.get(ChronoField.DAY_OF_YEAR);

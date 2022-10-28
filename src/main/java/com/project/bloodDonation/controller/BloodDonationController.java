@@ -3,7 +3,9 @@ package com.project.bloodDonation.controller;
 import com.project.bloodDonation.domain.BloodDonation;
 import com.project.bloodDonation.dto.BloodDonationDTO;
 import com.project.bloodDonation.service.BloodDonateServiceImpl;
+import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import net.bytebuddy.asm.Advice.OffsetMapping.Target.ForField.ReadOnly;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,20 +24,19 @@ public class BloodDonationController {
 
   @RequestMapping(value = "/")
   public ResponseEntity createInfo(@RequestBody BloodDonationDTO donationDTO){
-    ResponseEntity responseEntity = bloodDonateService.createDonationInfo(donationDTO);
-    return responseEntity;
+    return ResponseEntity.ok(bloodDonateService.createDonationInfo(donationDTO));
   }
+
 
   @RequestMapping(value = "/{id}")
   public ResponseEntity getInfo(@PathVariable("id") Long id) {
-    BloodDonation donation = bloodDonateService.getDonationInfo(id);
-    return new ResponseEntity(donation, HttpStatus.OK);
+    return ResponseEntity.ok(bloodDonateService.getDonationInfo(id));
   }
 
+  @Transactional
   @PatchMapping("/{id}")
   public ResponseEntity resetInfo(@PathVariable("id") Long id, @RequestBody BloodDonationDTO bloodDonationDTO) {
-      ResponseEntity donationInfo = bloodDonateService.updateDonationInfo(bloodDonationDTO);
-    return new ResponseEntity(donationInfo, HttpStatus.OK);
+    return ResponseEntity.ok(bloodDonateService.updateDonationInfo(id, bloodDonationDTO));
   }
 
 }
