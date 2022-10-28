@@ -34,7 +34,7 @@ public class BloodDonationController {
   }
 
   @Transactional
-  @PatchMapping("/{id}")
+  @RequestMapping(value = "/{id}", method = RequestMethod.PATCH)
   public ResponseEntity updateInfo(@PathVariable("id") Long id, @RequestBody BloodDonationDTO bloodDonationDTO) {
     return ResponseEntity.ok(bloodDonateService.updateDonationInfo(id, bloodDonationDTO));
   }

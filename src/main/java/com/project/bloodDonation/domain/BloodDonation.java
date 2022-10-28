@@ -1,5 +1,6 @@
 package com.project.bloodDonation.domain;
 
+import com.project.bloodDonation.dto.BloodDonationDTO;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
@@ -34,7 +35,8 @@ public class BloodDonation {
   @Column(name = "blood_Donation_Available_Date", nullable=false)
   private int availableDate;
 
-  public void update(LocalDateTime date, int availableDate) {
+  public void update(int count, LocalDateTime date, int availableDate) {
+    this.count = count;
     this.date = date;
     this.availableDate = availableDate;
   }
