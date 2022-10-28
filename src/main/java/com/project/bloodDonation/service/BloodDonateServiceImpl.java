@@ -47,18 +47,18 @@ public class BloodDonateServiceImpl {
   }
 
   public BloodDonation getDonationInfo(Long id) {
-    Optional<BloodDonation> donation = bloodDonationRepository.findById(id);
+    BloodDonation donation = bloodDonationRepository.findById(id).get();
     return BloodDonation.builder()
-        .id(donation.get().getId())
-        .count(donation.get().getCount())
-        .date(donation.get().getDate())
-        .availableDate(count_D_Day(donation.get().getAvailableDate()))
+        .id(donation.getId())
+        .count(donation.getCount())
+        .date(donation.getDate())
+        .availableDate(count_D_Day(donation.getAvailableDate()))
         .build();
   }
 
   public ResponseEntity updateDonationInfo(Long id, BloodDonationDTO bloodDonationDTO) {
     BloodDonation donation = bloodDonationRepository.findById(id).get();
-    if (bloodDonationDTO.getBlood_Donation_Count() <= 0) {
+    if (bloodDonationDTO.getBlood_Donation_Available_Date() <= OVER) {
       donation.update(LocalDateTime.now(), calculationAvailableDate());
       bloodDonationRepository.save(donation);
       return new ResponseEntity("success", HttpStatus.OK);
@@ -69,7 +69,8 @@ public class BloodDonateServiceImpl {
   private int calculationAvailableDate() {
     return localDate.get(ChronoField.DAY_OF_YEAR) + AFTER_BLOOD_DONATION_DATE;
   }
-  public int count_D_Day(int blood_Donation_Available_Date) {
+
+  private int count_D_Day(int blood_Donation_Available_Date) {
     return blood_Donation_Available_Date - localDate.get(ChronoField.DAY_OF_YEAR);
   }
 }
