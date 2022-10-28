@@ -23,8 +23,8 @@ public class BloodDonationController {
   private final BloodDonateServiceImpl bloodDonateService;
 
   @RequestMapping(value = "/")
-  public ResponseEntity createInfo(@RequestBody BloodDonationDTO donationDTO){
-    return ResponseEntity.ok(bloodDonateService.createDonationInfo(donationDTO));
+  public BloodDonationDTO createInfo(){
+    return bloodDonateService.createDonationInfo();
   }
 
 

@@ -4,6 +4,7 @@ package com.project.bloodDonation.service;
 import com.project.bloodDonation.domain.BloodDonation;
 import com.project.bloodDonation.dto.BloodDonationDTO;
 import com.project.bloodDonation.repository.BloodDonationRepository;
+import java.security.DomainLoadStoreParameter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoField;
@@ -29,21 +30,19 @@ public class BloodDonateServiceImpl {
   final BloodDonationRepository bloodDonationRepository;
   LocalDate localDate = LocalDate.now();
 
-  public ResponseEntity createDonationInfo(BloodDonationDTO donationDTO) {
+  public BloodDonationDTO createDonationInfo() {
     Optional<BloodDonation> donation = bloodDonationRepository.findById(USER_ID);
     if (donation.isEmpty()) {
       BloodDonation donationInfo = BloodDonation.builder()
-          .id(donationDTO.getId())
-          .count(donationDTO.getBlood_Donation_Count() + 1)
+          .id(USER_ID)
+          .count(1)
           .date(LocalDateTime.now())
           .availableDate(calculationAvailableDate())
           .build();
-
       bloodDonationRepository.save(donationInfo);
-
-      return new ResponseEntity("success", HttpStatus.OK);
+      return new BloodDonationDTO(donationInfo);
     }
-    return new ResponseEntity("fail", HttpStatus.OK);
+    return new BloodDonationDTO(donation.get());
   }
 
   public BloodDonation getDonationInfo(Long id) {
@@ -59,8 +58,8 @@ public class BloodDonateServiceImpl {
   public ResponseEntity updateDonationInfo(Long id, BloodDonationDTO bloodDonationDTO) {
     BloodDonation donation = bloodDonationRepository.findById(id).get();
     if (bloodDonationDTO.getBlood_Donation_Available_Date() <= OVER) {
-        bloodDonationDTO.update(bloodDonationDTO.getBlood_Donation_Count() + 1,LocalDateTime.now(), calculationAvailableDate());
-      bloodDonationRepository.save(bloodDonationDTO.toEntity());
+      donation.update(donation.getCount() + 1,LocalDateTime.now(), calculationAvailableDate());
+      bloodDonationRepository.save(donation);
       return new ResponseEntity("success", HttpStatus.OK);
     }
     return new ResponseEntity("fail", HttpStatus.OK);

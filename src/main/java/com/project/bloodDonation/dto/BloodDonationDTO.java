@@ -3,7 +3,6 @@ package com.project.bloodDonation.dto;
 
 import com.project.bloodDonation.domain.BloodDonation;
 import java.time.LocalDateTime;
-import javax.xml.crypto.KeySelector.Purpose;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,21 +21,11 @@ public class BloodDonationDTO {
   private LocalDateTime blood_Donation_Date;
   private int blood_Donation_Available_Date;
 
-  public void update(int count, LocalDateTime date, int available_Date) {
-    this.blood_Donation_Count = count;
-    this.blood_Donation_Date = date;
-    this.blood_Donation_Available_Date = available_Date;
+
+  public BloodDonationDTO(BloodDonation donation) {
+    this.id = donation.getId();
+    this.blood_Donation_Count = donation.getCount();
+    this.blood_Donation_Date = donation.getDate();
+    this.blood_Donation_Available_Date = donation.getAvailableDate();
   }
-
-  public BloodDonation toEntity(){
-    return BloodDonation.builder()
-        .id(this.getId())
-        .count(this.getBlood_Donation_Count())
-        .date(this.getBlood_Donation_Date())
-        .availableDate(this.getBlood_Donation_Available_Date())
-        .build();
-  }
-
-
-
 }
