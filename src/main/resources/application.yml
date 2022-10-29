@@ -1,7 +1,7 @@
 spring:
   datasource:
     url: jdbc:mysql://43.200.85.14:3306/blood_donation
-    username: root
+    username: user
     password: shyu0220
   mvc:
     hidden-method:
