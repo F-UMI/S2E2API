@@ -26,11 +26,7 @@ public class BloodDonationHouse {
   @Column(name = "name", nullable=false)
   private String name;
 
-  @Column(name = "longitude", nullable=false)
-  private String longitude;
-
-  @Column(name = "latitude", nullable = false)
-  private double latitude;
-
+  @Column(name = "streetNameAddress", nullable=false)
+  private String streetNameAddress;
 
 }
