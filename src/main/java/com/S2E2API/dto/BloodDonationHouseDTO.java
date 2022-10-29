@@ -12,5 +12,6 @@ import lombok.NoArgsConstructor;
 public class BloodDonationHouseDTO {
   private Long id;
   private String name;
-  private String streetNameAddress;
+  private double latitude;
+  private double longitude;
 }

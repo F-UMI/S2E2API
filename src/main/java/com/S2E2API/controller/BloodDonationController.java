@@ -34,4 +34,8 @@ public class BloodDonationController {
     return ResponseEntity.ok(bloodDonateService.updateDonationInfo(id, bloodDonationDTO));
   }
 
+  @RequestMapping("/main")
+  public String getMain() {
+    return "main";
+  }
 }
