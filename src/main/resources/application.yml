@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/blood_donation
+    url: jdbc:mysql://43.200.85.14:3306/blood_donation
     username: root
     password: shyu0220
   mvc:
