@@ -1,4 +1,4 @@
-package com.project.bloodDonation.domain;
+package com.S2E2API.domain;
 
 import java.time.LocalDateTime;
 import javax.persistence.Column;
@@ -18,20 +18,24 @@ import org.hibernate.annotations.DynamicUpdate;
 @DynamicUpdate
 @AllArgsConstructor
 @NoArgsConstructor
-public class BloodDonationHouse {
+public class BloodDonation {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(name = "name", nullable=false)
-  private String name;
+  @Column(name = "blood_Donation_Count", nullable=false)
+  private int count;
 
-  @Column(name = "longitude", nullable=false)
-  private String longitude;
+  @Column(name = "blood_Donation_Date", nullable = false)
+  private LocalDateTime date;
 
-  @Column(name = "latitude", nullable = false)
-  private double latitude;
+  @Column(name = "blood_Donation_Available_Date", nullable=false)
+  private int availableDate;
 
-
+  public void update(int count, LocalDateTime date, int availableDate) {
+    this.count = count;
+    this.date = date;
+    this.availableDate = availableDate;
+  }
 }

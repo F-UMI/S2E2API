@@ -1,21 +1,17 @@
-package com.project.bloodDonation.service;
+package com.S2E2API.service;
 
 
-import com.project.bloodDonation.domain.BloodDonation;
-import com.project.bloodDonation.dto.BloodDonationDTO;
-import com.project.bloodDonation.repository.BloodDonationRepository;
-import java.security.DomainLoadStoreParameter;
+import com.S2E2API.domain.BloodDonation;
+import com.S2E2API.dto.BloodDonationDTO;
+import com.S2E2API.repository.BloodDonationRepository;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoField;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 @Service

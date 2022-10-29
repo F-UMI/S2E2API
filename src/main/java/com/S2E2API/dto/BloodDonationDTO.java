@@ -1,7 +1,7 @@
-package com.project.bloodDonation.dto;
+package com.S2E2API.dto;
 
 
-import com.project.bloodDonation.domain.BloodDonation;
+import com.S2E2API.domain.BloodDonation;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

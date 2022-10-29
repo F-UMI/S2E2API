@@ -1,4 +1,4 @@
-package com.project.bloodDonation.dto;
+package com.S2E2API.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
