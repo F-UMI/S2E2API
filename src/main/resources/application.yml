@@ -3,7 +3,7 @@ spring:
     password: 'shyu0220'
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: 'root'
-    url: "jdbc:mysql://blood-donation.cvpej2vgsper.ap-northeast-2.rds.amazonaws.com:3306/blood_donation?characterEncoding=UTF-8&serverTimezone=UTC&"
+    url: "jdbc:mysql://blood-donation.cvpej2vgsper.ap-northeast-2.rds.amazonaws.com:3306/blood_donation?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul"
   output:
     ansi:
       enabled: always
