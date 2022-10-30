@@ -29,7 +29,7 @@ public class BloodDonationController {
   }
 
   @Transactional
-  @RequestMapping(value = "/{id}", method = RequestMethod.PATCH)
+  @RequestMapping(value = "/update/{id}", method = RequestMethod.PATCH)
   public ResponseEntity updateInfo(@PathVariable("id") Long id, @RequestBody BloodDonationDTO bloodDonationDTO) {
     return ResponseEntity.ok(bloodDonateService.updateDonationInfo(id, bloodDonationDTO));
   }
