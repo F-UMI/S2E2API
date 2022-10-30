@@ -30,7 +30,7 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'com.squareup.retrofit2:retrofit:2.4.0'
 	implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
-	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.30'
+	implementation 'mysql:mysql-connector-java'
 }
 
 tasks.named('test') {

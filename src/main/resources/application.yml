@@ -1,9 +1,14 @@
 spring:
   datasource:
-    Driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://blood-donation.c9zurdezvbur.ap-northeast-1.rds.amazonaws.com:3306/blood_donation?characterEncoding=UTF-8&serverTimezone=UTC&
-    username: root
-    password: shyu0220
+    password: 'shyu0220'
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: 'root'
+    url: jdbc:mysql://blood-donation.c9zurdezvbur.ap-northeast-1.rds.amazonaws.com:3306/blood_donation
+  output:
+    ansi:
+      enabled: always
+  session:
+    store-type: jdbc
 
   mvc:
     hidden-method:
@@ -14,7 +19,15 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-
+    naming:
+     physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    properties:
+      hibernate:
+        dialect:
+          nodeValue: org.hibernate.dialect.MySQL57Dialect
+          storage_engine: innodb
+    database: mysql
 
   thymeleaf:
     cache: true
@@ -22,4 +35,3 @@ spring:
 
 server:
   port: 8086
-
