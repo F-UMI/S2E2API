@@ -1,7 +1,6 @@
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql:aws://blood-donation.c9zurdezvbur.ap-northeast-1.rds.amazonaws.com:3306/blood_donation?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    url: jdbc:mysql://blood-donation.c9zurdezvbur.ap-northeast-1.rds.amazonaws.com:3306/blood_donation
     username: root
     password: shyu0220
 
