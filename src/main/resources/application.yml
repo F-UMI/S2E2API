@@ -1,7 +1,7 @@
 spring:
   datasource:
     Driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://blood-donation.c9zurdezvbur.ap-northeast-1.rds.amazonaws.com:3306/blood_donation?&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&allowLoadLocalInfile=true
+    url: jdbc:mysql://blood-donation.c9zurdezvbur.ap-northeast-1.rds.amazonaws.com:3306/blood_donation?characterEncoding=UTF-8&serverTimezone=UTC&
     username: root
     password: shyu0220
 
