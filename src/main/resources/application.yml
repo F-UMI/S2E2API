@@ -20,7 +20,7 @@ spring:
       ddl-auto: update
     show-sql: true
     naming:
-     physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+     physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     properties:
       hibernate:
