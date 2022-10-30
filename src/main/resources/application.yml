@@ -18,5 +18,6 @@ spring:
     cache: true
     prefix: classpath:/templates/
 
-
+server:
+  port: 8086
 
