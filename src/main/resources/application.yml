@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://43.200.85.14:3306/blood_donation?serverTimezone=UTC&characterEncoding=UTF-8
+    url: jdbc:mysql://43.200.85.14:3306/blood_donation?serverTimezone=UTC&characterEncoding=UTF-8&
     username: user
     password: shyu0220
   mvc:
