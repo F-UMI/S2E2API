@@ -26,13 +26,13 @@ public class BloodDonationController {
 
   private final BloodDonateServiceImpl bloodDonateService;
 
-  @RequestMapping(value = "/{id}")
+  @RequestMapping(value = "/{id}", method = RequestMethod.GET)
   public ResponseEntity getInfo(@PathVariable("id") Long id) {
     return ResponseEntity.ok(bloodDonateService.getDonationInfo(id));
   }
 
 
-  @RequestMapping(value = "/1", method = RequestMethod.PATCH)
+  @RequestMapping(value = "/1", method = RequestMethod.POST)
   public ResponseEntity updateInfo(@RequestBody BloodDonationDTO bloodDonationDTO) {
     return ResponseEntity.ok(bloodDonateService.updateDonationInfo(bloodDonationDTO));
   }
