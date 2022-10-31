@@ -2,11 +2,16 @@ package com.S2E2API.service;
 
 
 import com.S2E2API.domain.BloodDonation;
+import com.S2E2API.domain.BloodDonationHouse;
 import com.S2E2API.dto.BloodDonationDTO;
+import com.S2E2API.dto.BloodDonationHouseDTO;
+import com.S2E2API.repository.BloodDonationHouseRepository;
 import com.S2E2API.repository.BloodDonationRepository;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoField;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +29,7 @@ public class BloodDonateServiceImpl {
   private final static int OVER = 0;
 
   final BloodDonationRepository bloodDonationRepository;
+  final BloodDonationHouseRepository bloodDonationHouseRepository;
   LocalDate localDate = LocalDate.now();
 
   public BloodDonationDTO createDonationInfo() {
@@ -67,5 +73,10 @@ public class BloodDonateServiceImpl {
 
   private int count_D_Day(int blood_Donation_Available_Date) {
     return blood_Donation_Available_Date - localDate.get(ChronoField.DAY_OF_YEAR);
+  }
+
+  public List<BloodDonationHouse> getHouseInfo() {
+    return new ArrayList<>(
+        bloodDonationHouseRepository.findAll());
   }
 }
