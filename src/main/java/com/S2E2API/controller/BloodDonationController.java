@@ -43,7 +43,7 @@ public class BloodDonationController {
     return "main";
   }
 
-  @RequestMapping("/house")
+  @RequestMapping("/house/get")
   public ResponseEntity<List<BloodDonationHouse>> getHouseInfo() {
     List<BloodDonationHouse> bloodDonationHouseList = bloodDonateService.getHouseInfo();
     return new ResponseEntity<>(bloodDonationHouseList, HttpStatus.OK);
