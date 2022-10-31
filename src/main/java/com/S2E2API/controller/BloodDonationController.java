@@ -32,15 +32,14 @@ public class BloodDonationController {
     return ResponseEntity.ok(bloodDonateService.getDonationInfo(id));
   }
 
-
   @RequestMapping(value = "/{id}", method = RequestMethod.PATCH)
-  public ResponseEntity updateInfo(@PathVariable
-      ("id") Long id, @RequestParam("id") BloodDonationDTO bloodDonationDTO) {
-    return ResponseEntity.ok(bloodDonateService.updateDonationInfo(id, bloodDonationDTO));
+  public ResponseEntity resetInfo(@PathVariable
+      ("id") Long id) {
+    return ResponseEntity.ok(bloodDonateService.updateDonationInfo(id));
   }
 
+  @RequestMapping(value = "/findAll")
   @ResponseBody
-  @RequestMapping("/api")
   public ResponseEntity<List<BloodDonationHouse>> getHouseInfo() {
     List<BloodDonationHouse> bloodDonationHouseList = bloodDonateService.getHouseInfo();
     return new ResponseEntity<>(bloodDonationHouseList, HttpStatus.OK);
