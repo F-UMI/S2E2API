@@ -24,6 +24,7 @@ import retrofit2.http.PATCH;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/bloodDonation")
 public class BloodDonationController {
 
   private final BloodDonateServiceImpl bloodDonateService;
@@ -45,6 +46,7 @@ public class BloodDonationController {
     List<BloodDonationHouse> bloodDonationHouseList = bloodDonateService.getHouseInfo();
     return new ResponseEntity<>(bloodDonationHouseList, HttpStatus.OK);
   }
+  // , /id , 같은 url 에 같은 요청이 가고있다, 충돌이일어난다.
 
   //Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; nested exception is java.lang.NumberFormatException: For input string: "findAll"]
 
