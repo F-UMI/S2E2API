@@ -31,22 +31,7 @@ public class BloodDonateServiceImpl {
   final BloodDonationRepository bloodDonationRepository;
   final BloodDonationHouseRepository bloodDonationHouseRepository;
   LocalDate localDate = LocalDate.now();
-
-//  public BloodDonationDTO createDonationInfo() {
-//    Optional<BloodDonation> donation = bloodDonationRepository.findById(USER_ID);
-//    if (donation.isEmpty()) {
-//      BloodDonation donationInfo = BloodDonation.builder()
-//          .id(USER_ID)
-//          .count(1)
-//          .date(LocalDateTime.now())
-//          .availableDate(calculationAvailableDate())
-//          .build();
-//      bloodDonationRepository.save(donationInfo);
-//      return new BloodDonationDTO(donationInfo);
-//    }
-//    return new BloodDonationDTO(donation.get());
-//  }
-
+  
   public BloodDonation getDonationInfo(Long id) {
     BloodDonation donation = bloodDonationRepository.findById(id).get();
     return BloodDonation.builder()
@@ -57,8 +42,8 @@ public class BloodDonateServiceImpl {
         .build();
   }
 
-  public ResponseEntity updateDonationInfo(BloodDonationDTO bloodDonationDTO) {
-    BloodDonation donation = bloodDonationRepository.getById(1L);
+  public ResponseEntity updateDonationInfo(Long id, BloodDonationDTO bloodDonationDTO) {
+    BloodDonation donation = bloodDonationRepository.getById(id);
     if (bloodDonationDTO.getBlood_Donation_Available_Date() <= OVER) {
       donation.update(donation.getCount() + 1,LocalDateTime.now(), calculationAvailableDate());
       bloodDonationRepository.save(donation);
