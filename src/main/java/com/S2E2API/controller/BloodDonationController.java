@@ -35,10 +35,9 @@ public class BloodDonationController {
     return ResponseEntity.ok(bloodDonateService.getDonationInfo(id));
   }
 
-  @RequestMapping(value = "/{id}", method = RequestMethod.POST)
-  public ResponseEntity resetInfo(@PathVariable
-      ("id") Long id, @RequestBody StatusDTO statusDTO) {
-    return ResponseEntity.ok(bloodDonateService.updateDonationInfo(id, statusDTO));
+  @RequestMapping(value = "/day", method = RequestMethod.POST)
+  public ResponseEntity resetInfo(@RequestBody StatusDTO statusDTO) {
+    return ResponseEntity.ok(bloodDonateService.updateDonationInfo(statusDTO));
 
   }
 

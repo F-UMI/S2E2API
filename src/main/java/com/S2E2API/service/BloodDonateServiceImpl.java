@@ -40,8 +40,8 @@ public class BloodDonateServiceImpl {
         .build();
   }
 
-  public ResponseEntity updateDonationInfo(Long id, StatusDTO bloodDonationDTO) {
-    BloodDonation donation = bloodDonationRepository.getById(id);
+  public ResponseEntity updateDonationInfo(StatusDTO bloodDonationDTO) {
+    BloodDonation donation = bloodDonationRepository.getById(1L);
     if (bloodDonationDTO.getStatus().equals("YES")) {
       donation.update(donation.getCount() + 1,LocalDateTime.now(), calculationAvailableDate());
       bloodDonationRepository.save(donation);
