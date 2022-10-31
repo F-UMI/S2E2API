@@ -3,7 +3,7 @@ package com.S2E2API.service;
 
 import com.S2E2API.domain.BloodDonation;
 import com.S2E2API.domain.BloodDonationHouse;
-import com.S2E2API.dto.BloodDonationDTO;
+import com.S2E2API.dto.StatusDTO;
 import com.S2E2API.repository.BloodDonationHouseRepository;
 import com.S2E2API.repository.BloodDonationRepository;
 import java.time.LocalDate;
@@ -40,9 +40,9 @@ public class BloodDonateServiceImpl {
         .build();
   }
 
-  public ResponseEntity updateDonationInfo(Long id, BloodDonationDTO bloodDonationDTO) {
+  public ResponseEntity updateDonationInfo(Long id, StatusDTO bloodDonationDTO) {
     BloodDonation donation = bloodDonationRepository.getById(id);
-    if (bloodDonationDTO.getBlood_Donation_Available_Date() <= OVER) {
+    if (bloodDonationDTO.getStatus().equals("YES")) {
       donation.update(donation.getCount() + 1,LocalDateTime.now(), calculationAvailableDate());
       bloodDonationRepository.save(donation);
       return new ResponseEntity("success", HttpStatus.OK);

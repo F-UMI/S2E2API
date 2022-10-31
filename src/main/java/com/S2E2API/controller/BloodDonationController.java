@@ -3,6 +3,7 @@ package com.S2E2API.controller;
 import com.S2E2API.domain.BloodDonationHouse;
 import com.S2E2API.dto.BloodDonationDTO;
 import com.S2E2API.dto.BloodDonationHouseDTO;
+import com.S2E2API.dto.StatusDTO;
 import com.S2E2API.service.BloodDonateServiceImpl;;
 import java.util.List;
 import javax.transaction.Transactional;
@@ -34,22 +35,18 @@ public class BloodDonationController {
     return ResponseEntity.ok(bloodDonateService.getDonationInfo(id));
   }
 
-  @RequestMapping(value = "/{id}", method = RequestMethod.PATCH)
+  @RequestMapping(value = "/{id}", method = RequestMethod.POST)
   public ResponseEntity resetInfo(@PathVariable
-      ("id") Long id, @RequestBody BloodDonationDTO bloodDonationDTO) {
-    return ResponseEntity.ok(bloodDonateService.updateDonationInfo(id, bloodDonationDTO));
+      ("id") Long id, @RequestBody StatusDTO statusDTO) {
+    return ResponseEntity.ok(bloodDonateService.updateDonationInfo(id, statusDTO));
+
   }
 
-  @RequestMapping(value = "/findAll"  ,produces = MediaType.APPLICATION_PROBLEM_JSON_VALUE)
+  @RequestMapping(value = "/findAll"  , produces = MediaType.APPLICATION_PROBLEM_JSON_VALUE)
   @ResponseBody
   public ResponseEntity<List<BloodDonationHouse>> getHouseInfo() {
     List<BloodDonationHouse> bloodDonationHouseList = bloodDonateService.getHouseInfo();
     return new ResponseEntity<>(bloodDonationHouseList, HttpStatus.OK);
   }
-  // , /id , 같은 url 에 같은 요청이 가고있다, 충돌이일어난다.
-
-  //Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; nested exception is java.lang.NumberFormatException: For input string: "findAll"]
-
-
 }
 
