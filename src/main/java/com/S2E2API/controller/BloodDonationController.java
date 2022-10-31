@@ -36,8 +36,8 @@ public class BloodDonationController {
 
   @RequestMapping(value = "/{id}", method = RequestMethod.PATCH)
   public ResponseEntity resetInfo(@PathVariable
-      ("id") Long id) {
-    return ResponseEntity.ok(bloodDonateService.updateDonationInfo(id));
+      ("id") Long id, @RequestBody BloodDonationDTO bloodDonationDTO) {
+    return ResponseEntity.ok(bloodDonateService.updateDonationInfo(id, bloodDonationDTO));
   }
 
   @RequestMapping(value = "/findAll"  ,produces = MediaType.APPLICATION_PROBLEM_JSON_VALUE)
