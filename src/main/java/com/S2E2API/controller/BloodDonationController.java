@@ -32,7 +32,7 @@ public class BloodDonationController {
   }
 
 
-  @RequestMapping(value = "/1", method = RequestMethod.POST)
+  @RequestMapping(value = "/1", method = RequestMethod.PATCH)
   public ResponseEntity updateInfo(@RequestBody BloodDonationDTO bloodDonationDTO) {
     return ResponseEntity.ok(bloodDonateService.updateDonationInfo(bloodDonationDTO));
   }
