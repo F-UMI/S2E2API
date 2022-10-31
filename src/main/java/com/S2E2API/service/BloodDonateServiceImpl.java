@@ -31,7 +31,7 @@ public class BloodDonateServiceImpl {
   final BloodDonationRepository bloodDonationRepository;
   final BloodDonationHouseRepository bloodDonationHouseRepository;
   LocalDate localDate = LocalDate.now();
-  
+
   public BloodDonation getDonationInfo(Long id) {
     BloodDonation donation = bloodDonationRepository.findById(id).get();
     return BloodDonation.builder()
