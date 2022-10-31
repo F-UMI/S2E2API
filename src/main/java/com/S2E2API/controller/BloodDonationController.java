@@ -32,10 +32,9 @@ public class BloodDonationController {
   }
 
 
-  @RequestMapping(value = "/{id}", method = RequestMethod.PATCH)
-  public ResponseEntity updateInfo(@PathVariable
-      ("id") Long id,BloodDonationDTO bloodDonationDTO) {
-    return ResponseEntity.ok(bloodDonateService.updateDonationInfo(id, bloodDonationDTO));
+  @RequestMapping(value = "/1", method = RequestMethod.PATCH)
+  public ResponseEntity updateInfo(@RequestBody BloodDonationDTO bloodDonationDTO) {
+    return ResponseEntity.ok(bloodDonateService.updateDonationInfo(bloodDonationDTO));
   }
 
   @RequestMapping("/")
