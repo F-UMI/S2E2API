@@ -21,10 +21,10 @@ public class BloodDonationController {
 
   private final BloodDonateServiceImpl bloodDonateService;
 
-  @RequestMapping(value = "/")
-  public BloodDonationDTO createInfo() {
-    return bloodDonateService.createDonationInfo();
-  }
+//  @RequestMapping(value = "/")
+//  public BloodDonationDTO createInfo() {
+//    return bloodDonateService.createDonationInfo();
+//  }
 
 
   @RequestMapping(value = "/{id}")
@@ -43,7 +43,7 @@ public class BloodDonationController {
     return "main";
   }
 
-  @RequestMapping("/house/get")
+  @RequestMapping("/")
   public ResponseEntity<List<BloodDonationHouse>> getHouseInfo() {
     List<BloodDonationHouse> bloodDonationHouseList = bloodDonateService.getHouseInfo();
     return new ResponseEntity<>(bloodDonationHouseList, HttpStatus.OK);
