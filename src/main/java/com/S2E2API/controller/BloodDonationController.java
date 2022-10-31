@@ -26,12 +26,6 @@ public class BloodDonationController {
 
   private final BloodDonateServiceImpl bloodDonateService;
 
-//  @RequestMapping(value = "/")
-//  public BloodDonationDTO createInfo() {
-//    return bloodDonateService.createDonationInfo();
-//  }
-
-
   @RequestMapping(value = "/{id}")
   public ResponseEntity getInfo(@PathVariable("id") Long id) {
     return ResponseEntity.ok(bloodDonateService.getDonationInfo(id));
@@ -39,11 +33,11 @@ public class BloodDonationController {
 
 
   @RequestMapping(value = "/{id}", method = RequestMethod.PATCH)
-  public ResponseEntity updateInfo(@PathVariable("id") Long id, @RequestBody BloodDonationDTO bloodDonationDTO) {
+  public ResponseEntity updateInfo(@PathVariable
+      ("id") Long id, @RequestBody BloodDonationDTO bloodDonationDTO) {
     return ResponseEntity.ok(bloodDonateService.updateDonationInfo(id, bloodDonationDTO));
   }
 
-  @ResponseBody
   @RequestMapping("/")
   public ResponseEntity<List<BloodDonationHouse>> getHouseInfo() {
     List<BloodDonationHouse> bloodDonationHouseList = bloodDonateService.getHouseInfo();
