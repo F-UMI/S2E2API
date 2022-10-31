@@ -9,11 +9,16 @@ import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import retrofit2.http.PATCH;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,10 +26,10 @@ public class BloodDonationController {
 
   private final BloodDonateServiceImpl bloodDonateService;
 
-//  @RequestMapping(value = "/")
-//  public BloodDonationDTO createInfo() {
-//    return bloodDonateService.createDonationInfo();
-//  }
+  @RequestMapping(value = "/")
+  public BloodDonationDTO createInfo() {
+    return bloodDonateService.createDonationInfo();
+  }
 
 
   @RequestMapping(value = "/{id}")
@@ -32,18 +37,14 @@ public class BloodDonationController {
     return ResponseEntity.ok(bloodDonateService.getDonationInfo(id));
   }
 
-  @Transactional
-  @RequestMapping(value = "/update/{id}")
+
+  @RequestMapping(value = "/{id}", method = RequestMethod.PATCH)
   public ResponseEntity updateInfo(@PathVariable("id") Long id, @RequestBody BloodDonationDTO bloodDonationDTO) {
     return ResponseEntity.ok(bloodDonateService.updateDonationInfo(id, bloodDonationDTO));
   }
 
-  @RequestMapping("/main")
-  public String getMain() {
-    return "main";
-  }
-
-  @RequestMapping("/")
+  @ResponseBody
+  @RequestMapping("/houseList")
   public ResponseEntity<List<BloodDonationHouse>> getHouseInfo() {
     List<BloodDonationHouse> bloodDonationHouseList = bloodDonateService.getHouseInfo();
     return new ResponseEntity<>(bloodDonationHouseList, HttpStatus.OK);

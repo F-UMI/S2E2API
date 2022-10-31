@@ -58,7 +58,7 @@ public class BloodDonateServiceImpl {
   }
 
   public ResponseEntity updateDonationInfo(Long id, BloodDonationDTO bloodDonationDTO) {
-    BloodDonation donation = bloodDonationRepository.findById(id).get();
+    BloodDonation donation = bloodDonationRepository.getById(id);
     if (bloodDonationDTO.getBlood_Donation_Available_Date() <= OVER) {
       donation.update(donation.getCount() + 1,LocalDateTime.now(), calculationAvailableDate());
       bloodDonationRepository.save(donation);
